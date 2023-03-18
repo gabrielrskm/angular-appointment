@@ -1,0 +1,18 @@
+<form >
+    <select name="select" id="select" class="form-select" (change)="cambiarUsuario($event)">
+        <option *ngFor="let item of users"  value={{item.id}} > 
+            user{{item.id}}
+        </option>
+    
+    </select>
+    <div *ngFor="let item of list;let i = index" >
+        <button class="bord"
+            (click)="alert(i)"
+            [ngStyle]="{'background-color': item.turnRest < 1? 'red':''}">
+            {{item.hour}}:{{item.minute}}
+        </button>
+        &nbsp;<strong id="strong{{i}}">restan {{item.turnRest}} turnos</strong>
+    </div>
+    
+
+</form>
