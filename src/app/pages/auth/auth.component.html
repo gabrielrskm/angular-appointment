@@ -1,0 +1,75 @@
+<div class="content">
+  <div class="title">
+    <h1>Welcome to Appointment page</h1>
+    <h2>Please login for reserve</h2>
+  </div>
+
+  <mat-card class="card">
+    <mat-card-content>
+
+      <mat-tab-group>
+
+        <mat-tab label="LogIn">
+
+          <div class="tab">
+            <form (ngSubmit)="login()">
+              <br>
+              <mat-form-field>
+                <mat-label>Usuario</mat-label>
+                <input matInput placeholder="Usuario" name="usuario" required />
+              </mat-form-field>
+              <br>
+              <mat-form-field>
+                <mat-label>Password</mat-label>
+                <input
+                  matInput
+                  placeholder="Password"
+                  type="password"
+                  name="password"
+                  required
+                />
+              </mat-form-field>
+              <br><br>
+              <button mat-raised-button color="primary">Ingresar</button>
+              <br><br>
+            </form>
+          </div>
+
+        </mat-tab>
+
+        <mat-tab label="SigIn" class="tab">
+          <div class="tab">
+
+
+            <form (ngSubmit)="login()"
+                >
+              <br>
+              <mat-form-field>
+                <mat-label>Nombre</mat-label>
+                <input matInput placeholder="Nombre" name="nombre" required />
+              </mat-form-field> 
+              <br>
+              <mat-form-field>
+                <mat-label>Email</mat-label>
+                <input matInput placeholder="Email" name="email" required />
+              </mat-form-field>
+              <br>
+              <mat-form-field>
+                <mat-label>Password</mat-label>
+                <input matInput placeholder="Password" name="pass1" required />
+              </mat-form-field>
+              <br>
+              <mat-form-field>
+                <mat-label>Repita Password</mat-label>
+                <input matInput placeholder="Repita Password" name="pass2" required />
+              </mat-form-field>
+              <br>
+                <button mat-raised-button color="primary">Registrarse</button>
+              <br><br>
+            </form>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-card-content>
+  </mat-card>
+</div>
