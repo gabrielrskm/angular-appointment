@@ -9,7 +9,4 @@ import { Component } from '@angular/core';
 export class AuthComponent {
 
   constructor() { }
-  login (){
-    console.log('login');
-  }
 }

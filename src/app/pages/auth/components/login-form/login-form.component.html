@@ -1,0 +1,23 @@
+<div class="">
+  <form (ngSubmit)="login()">
+    <br />
+    <mat-form-field>
+      <mat-label>Usuario</mat-label>
+      <input matInput placeholder="Usuario" name="usuario" required />
+    </mat-form-field>
+    <br />
+    <mat-form-field>
+      <mat-label>Password</mat-label>
+      <input
+        matInput
+        placeholder="Password"
+        type="password"
+        name="password"
+        required
+      />
+    </mat-form-field>
+    <br /><br />
+    <button mat-raised-button color="primary">Ingresar</button>
+    <br /><br />
+  </form>
+</div>
