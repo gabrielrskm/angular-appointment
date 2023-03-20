@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AuthRoutingModule } from './auth-routing.module';
+import { FormsModule } from '@angular/forms';
 
 import { MatTabsModule} from '@angular/material/tabs';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -26,12 +27,13 @@ import { LoginComponent } from './containers/login/login.component';
   imports: [
     CommonModule, 
     AuthRoutingModule,
+    FormsModule,
     MatTabsModule,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
     MatDatepickerModule,
-    MatCardModule
+    MatCardModule,
   ],
 })
 export class AuthModule {}
