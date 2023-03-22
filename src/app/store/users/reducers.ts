@@ -6,7 +6,7 @@ import {
   loadUsersSuccess,
   loadUsersFailure,
 } from './actions';
-import { User } from '../../models/user.model';
+import { User } from '../../core/models/user.model';
 
 export interface UserState {
   users: User[];
