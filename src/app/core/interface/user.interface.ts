@@ -4,3 +4,9 @@ export interface UserInterface {
   email: string;
   type : 'client' | 'admin';
 }
+
+export interface UserState {
+  users: UserInterface[];
+  loading: boolean;
+  error: any;
+}

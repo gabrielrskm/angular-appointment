@@ -7,5 +7,11 @@ export interface TurnInterface {
   hour_end : string;
   aviable : number;
   get : boolean;
-  users  : Array<UserInterface>;
+  users?  : Array<UserInterface>;
+}
+
+export interface AppointmentStateInterface {
+  appointments?:Array<TurnInterface>;
+  loadStatus: 'NOT_LOADED' | 'LOADING' | 'LOADED';
+  
 }

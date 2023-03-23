@@ -6,13 +6,9 @@ import {
   loadUsersSuccess,
   loadUsersFailure,
 } from './actions';
-import { User } from '../../core/models/user.model';
+import { UserState } from '../../core/interface/user.interface';
 
-export interface UserState {
-  users: User[];
-  loading: boolean;
-  error: any;
-}
+
 
 export const initialState: UserState = {
   users: [],
@@ -22,26 +18,7 @@ export const initialState: UserState = {
 
 export const userReducer = createReducer(
   initialState,
-  on(addUser, (state, { user }) => ({
-    ...state,
-    users: [...state.users, user],
-  })),
-  on(removeUser, (state, { userId }) => ({
-    ...state,
-    users: state.users.filter((user) => user.id !== userId),
-  })),
-  on(updateUser, (state, { user }) => ({
-    ...state,
-    users: state.users.map((u) => (u.id === user.id ? user : u)),
-  })),
-  on(loadUsersSuccess, (state, { users }) => ({
-    ...state,
-    users: users,
-    loading: false,
-  })),
-  on(loadUsersFailure, (state, { error }) => ({
-    ...state,
-    error: error,
-    loading: false,
-  }))
+  on(addUser, (state) => { 
+    return{...state, loading: true}
+  })
 );
