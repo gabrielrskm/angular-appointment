@@ -1,52 +1,27 @@
-import {
-  Component,
-  OnInit,
-  OnDestroy,
-  PLATFORM_ID,
-  inject,
-  EnvironmentInjector,
-} from '@angular/core';
-import { FirebaseService } from 'src/app/core/firebase/firebase.service';
+import {Component, inject} from '@angular/core';
 import { LoginInterface } from '../../interface/login.interface';
-import { Router } from '@angular/router';
-import { select, Store } from '@ngrx/store';
-import { getAppointments,setDataAppointment } from 'src/app/store/appointment/actions';
-import { selectAppointments } from '../../../../store/appointment/selectors';
+import { Store } from '@ngrx/store';
+import { loginUserWithEmail } from 'src/app/store/auth-user/actions';
 import { Observable } from 'rxjs';
+import { FirebaseService } from 'src/app/core/firebase/firebase.service';
 
 @Component({
   selector: 'app-login',
-  template: `<app-login-form (loginEvent)="login($event)"></app-login-form>`,
+  template: `<app-login-form (loginEvent)="login($event)"></app-login-form>
+  <p *ngIf="login$ | async"> Usuario registrado</p>
+  <p *ngIf="!(login$ | async)">Usuario No registrado</p>`,
 })
-export class LoginComponent {
+export class LoginComponent{
+  private store = inject(Store);
+  private fireService  = inject (FirebaseService);
+  login$ : Observable<boolean> = this.fireService.canLogin$;
 
-  dataStore$: Observable<any>
 
-  constructor(
-    private service: FirebaseService,
-    private router: Router,
-    private store: Store<any>
-  ) {
-    this.dataStore$ = this.store.select(selectAppointments)
-    this.dataStore$.subscribe((data) => {
-      console.log(data)
-    })
-    //this.store.dispatch(getAppointments());
-    this.store.dispatch(setDataAppointment({value: 'gabriel'}));
-    
-  }
 
-  async login(value: LoginInterface) {
-    try {
-      const response = await this.service.loginWithEmail(
-        value.email,
-        value.password
-      );
-      if (response) {
-        this.router.navigate(['/appointment']);
-      }
-    } catch (error: any) {
-      window.alert(error.message);
-    }
+  login(value: LoginInterface) {
+    this.store.dispatch(loginUserWithEmail({
+      email: value.email, password: value.password
+    }));
+
   }
 }

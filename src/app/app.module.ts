@@ -14,6 +14,8 @@ import { StoreModule } from '@ngrx/store';
 import { ROOT_REDUCERS } from './store/app.state';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
+import { AuthEffects } from './store/auth-user/effects';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,11 @@ import { EffectsModule } from '@ngrx/effects';
     provideAuth(() => getAuth()),
     provideDatabase(() => getDatabase()),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
-    EffectsModule.forRoot([])
+    EffectsModule.forRoot([
+      AuthEffects
+    ]),
+    StoreRouterConnectingModule.forRoot(),
+
   ],
   providers: [],
   bootstrap: [AppComponent]

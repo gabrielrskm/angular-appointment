@@ -4,6 +4,8 @@ import { PagesRoutingModule } from './pages-routing.module';
 
 import { AuthModule } from './auth/auth.module';
 
+import { FirebaseService } from '../core/firebase/firebase.service';
+
 
 
 @NgModule({
@@ -12,9 +14,12 @@ import { AuthModule } from './auth/auth.module';
   imports: [
     PagesRoutingModule,
     CommonModule,
-    AuthModule
+    AuthModule,
   ],
   exports: [
+  ],
+  providers: [
+    FirebaseService
   ]
 })
 export class PagesModule { }

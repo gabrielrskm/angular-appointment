@@ -1,17 +1,13 @@
 
 import { ActionReducerMap } from '@ngrx/store';
-import { UserState } from '../core/interface/user.interface';
-import { userReducer } from './users/reducers';
-import { appointmentReducer } from './appointment/reducers';
-import { AppointmentStateInterface } from '../core/interface/appointment.interface';
+import { UserInterface} from '../core/interface/user.interface';
+import { userReducer } from './auth-user/reducers';
 
 export interface AppState {
-  user: UserState;
-  appointment: AppointmentStateInterface;
+  user: UserInterface;
   
 }
 
 export const ROOT_REDUCERS : ActionReducerMap <AppState> = {
-  user : userReducer,
-  appointment : appointmentReducer
+  user : userReducer
   }
