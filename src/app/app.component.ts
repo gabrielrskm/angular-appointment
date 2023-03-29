@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { FirebaseService } from './core/firebase/firebase.service';
 import { AppState } from './store/app.state';
-import { loadAppointment } from './store/appointments/actions';
 
 
 
