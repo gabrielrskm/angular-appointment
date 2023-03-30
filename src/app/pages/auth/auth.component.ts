@@ -1,9 +1,7 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Store } from '@ngrx/store';
-import { BehaviorSubject } from 'rxjs';
-import { UserInterface } from 'src/app/core/interface/user.interface';
-import { canLogin } from 'src/app/store/auth-user/actions';
+import { BehaviorSubject, filter, Observable, tap } from 'rxjs';
+import { FirebaseService } from 'src/app/core/firebase/firebase.service';
 
 
 @Component({
@@ -11,6 +9,20 @@ import { canLogin } from 'src/app/store/auth-user/actions';
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.scss']
 })
-export class AuthComponent {
+export class AuthComponent implements OnInit {
   
+  router = inject(Router);
+  fireService = inject (FirebaseService);
+  canLogin$: Observable<string | null> = new BehaviorSubject(null);
+
+  ngOnInit(){
+    this.canLogin$ = this.fireService.getUserInfo()
+    this.canLogin$.subscribe((user) => {
+      if(!user)return;
+      console.log(user);
+      this.router.navigate(['/dashboard']);
+    })
+    
+  }
 }
+

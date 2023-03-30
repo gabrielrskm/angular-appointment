@@ -4,16 +4,19 @@ import {
   signInWithEmailAndPassword,
   GoogleAuthProvider,
   signInWithRedirect, 
-  idToken
+  user,
 } from '@angular/fire/auth';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { DatabaseService } from './database.service';
 
 @Injectable({ providedIn: 'root' })
+
 export class FirebaseService {
   private provider = new GoogleAuthProvider();
   private auth = inject(Auth);
-  private canLogin = new BehaviorSubject<boolean>(false);
+  private canLogin = new BehaviorSubject<string | null>(null);
   canLogin$ = this.canLogin.asObservable();
+  private dataService = inject(DatabaseService);
 
   loginWithEmail(email: string, password: string) {
     return signInWithEmailAndPassword(this.auth, email, password)
@@ -25,21 +28,16 @@ export class FirebaseService {
     return res;
   }
 
-  sessionActivate () : Observable<boolean>   {
-    (idToken(this.auth).subscribe(
-      (token) => {
-        if (token){
-          this.canLogin.next(true);
-        }
-        else{
-          this.canLogin.next(false);
-        }
+  getUserInfo () : Observable<string | null> {
+    const userResult = user(this.auth);
+    userResult.subscribe(
+      (user) => {
+        if( !user)return;
+        this.canLogin.next(user.email);
       }
-    ))
-      return this.canLogin$;
+    )
+    return this.canLogin$;
   }
-
-
 }
 
 
