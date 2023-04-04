@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { FirebaseService } from '../../core/firebase/firebase.service';
+import { FirebaseService } from '../../core/firebase/auth.service';
 import { switchMap } from 'rxjs/operators';
 
 @Injectable()

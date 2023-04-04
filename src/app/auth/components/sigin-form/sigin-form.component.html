@@ -1,0 +1,30 @@
+<div class="tab">
+
+
+  <form (ngSubmit)="signIn( $event)"
+      >
+    <br>
+    <mat-form-field>
+      <mat-label>Nombre</mat-label>
+      <input matInput placeholder="Nombre" name="nombre" required />
+    </mat-form-field> 
+    <br>
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input matInput placeholder="Email" name="email" required />
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <mat-label>Password</mat-label>
+      <input matInput placeholder="Password" name="pass1" required />
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <mat-label>Repita Password</mat-label>
+      <input matInput placeholder="Repita Password" name="pass2" required />
+    </mat-form-field>
+    <br>
+      <button mat-raised-button color="primary">Register</button>
+    <br><br>
+  </form>
+</div>

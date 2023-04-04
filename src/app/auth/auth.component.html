@@ -1,0 +1,35 @@
+<div class="content">
+   <div class="title">
+      <h1>Welcome to Appointment page</h1>
+      <h2>Please login for reserve</h2>
+   </div>
+
+   <mat-card class="card">
+      <mat-card-content>
+         <mat-tab-group>
+            <mat-tab label="Log In" >
+               <div class = "login">
+                  <app-login ></app-login>
+                  <hr>
+                  <div class="popup">
+                     <app-pop-up type = "google"></app-pop-up>
+                     <app-pop-up type = "facebook"></app-pop-up>
+                     <app-pop-up type = "github"></app-pop-up> 
+                  </div>      
+               </div>
+            </mat-tab>
+            <mat-tab label="Sig In">
+               <div class="sigin">
+                  <app-sigin></app-sigin>
+                  <hr>
+                  <div class="popup">
+                     <app-pop-up type = "google"></app-pop-up>
+                     <app-pop-up type = "facebook"></app-pop-up>
+                     <app-pop-up type = "github"></app-pop-up> 
+                  </div>
+               </div>
+            </mat-tab>
+         </mat-tab-group>
+      </mat-card-content>
+   </mat-card>
+</div>

@@ -1,0 +1,34 @@
+<div class="">
+    <form (ngSubmit)="clickForm()" #myForm="ngForm">
+        <br />
+        <mat-form-field>
+            <mat-label>Usuario</mat-label>
+            <input
+                [(ngModel)]="initForm.email"
+                matInput
+                placeholder="Usuario"
+                name="user"
+                required
+                [value]="title"
+            />
+        </mat-form-field>
+        <br />
+        <mat-form-field>
+            <mat-label>Password</mat-label>
+            <input
+                [(ngModel)]="initForm.pass"
+                matInput
+                placeholder="Password"
+                type="password"
+                name="pass"
+                required
+            />
+        </mat-form-field>
+        <br /><br />
+        <button mat-raised-button color="primary" 
+                [disabled]="myForm.invalid">
+            Log In
+        </button>
+        <br /><br />
+    </form>
+</div>

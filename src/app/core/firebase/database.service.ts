@@ -11,6 +11,7 @@ import {
   startAt,
 
 } from '@angular/fire/database';
+import { UserInformation } from '../interface/userInfo.interface';
 
 @Injectable({ providedIn: 'root' })
 export class DatabaseService {
@@ -19,7 +20,7 @@ export class DatabaseService {
   private dataListTurn$ = this.dataListTurn.asObservable();
   private dataListUser = new BehaviorSubject<{}[]>([]);
   private dataListUser$ = this.dataListUser.asObservable();
-  private dataListUserInfo = new BehaviorSubject<{}[]>([]);
+  private dataListUserInfo = new BehaviorSubject<UserInformation | null>(null);
   private dataListUserInfo$ = this.dataListUserInfo.asObservable();
   db = inject(Database);
 
@@ -46,7 +47,7 @@ export class DatabaseService {
 
   private snapshotDatabaseUsers(snapshot: DataSnapshot){
     if (!snapshot.exists()) {
-      console.log('no data');
+      console.log('no data ');
     }
     let result: any[] = [];
     snapshot.forEach((childSnapshot: DataSnapshot) => {
@@ -60,6 +61,18 @@ export class DatabaseService {
       result.push(obj);
     });
     this.dataListUser.next(result);
+  }
+
+  private snapshotDatabaseUserInfo(snapshot: DataSnapshot) {
+    if (!snapshot.exists()) {
+      console.log('no user info exists in database ');
+    }
+    const result: UserInformation = {
+      uid: snapshot.key || '',
+      name: snapshot.val().nombre,
+      role: snapshot.val().rol,
+    }
+    this.dataListUserInfo.next(result);
   }
   
   readDataQueryTurn() {
@@ -95,8 +108,8 @@ export class DatabaseService {
   }
 
   readDataQueryUserInfo(id: string) {
-    const starCountRef = ref(this.db, 'usuarios/' + id);
-    const callback = this.snapshotDatabaseUsers.bind(this);
+    const starCountRef = query(ref(this.db, 'usuarios/' + id) );
+    const callback = this.snapshotDatabaseUserInfo.bind(this);
     onValue(starCountRef, callback, (error) => console.log(error));
     return this.dataListUserInfo$;
   }
