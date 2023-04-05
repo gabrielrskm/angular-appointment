@@ -17,4 +17,8 @@ export class FacadeService {
     return {name : 'user', role : 'client'}
   }
 
+  getScheduleList() {
+    
+  }
+
 }

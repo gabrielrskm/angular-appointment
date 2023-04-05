@@ -1,4 +1,5 @@
 .days{
+    width: calc(100% - 3rem);
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -7,8 +8,17 @@
 }
 
 .schedule{
+    width: calc(100% - 3rem);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
+
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center;
+}
+

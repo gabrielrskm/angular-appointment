@@ -1,17 +1,12 @@
-<button mat-button>Log Out</button>
+<button mat-raised-button color="primary">Log Out</button>
+<br><br>
 <div class="content">
-
     <mat-card class = "days">
-        <div *ngFor="let item of items">
-            {{item}}
-        </div>
+        <app-calendar-smart></app-calendar-smart>
     </mat-card>
-
+    <br><br>
     <mat-card class = "schedule">
-        <mat-card-content>
-            schedule List
-        </mat-card-content>
-
+        <app-schedule-smart></app-schedule-smart>
     </mat-card>
-    
+
 </div>

@@ -1,4 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
+import { FacadeService } from '../core/services/facade.service';
+
+interface Calendar {
+  dayOfWeek: string,
+  numberDay: number,
+  month: string,
+  year: number
+}
 
 @Component({
   selector: 'app-appointment',
@@ -7,6 +15,11 @@ import { Component } from '@angular/core';
 })
 export class AppointmentComponent {
 
-  items : string []= ['hola','este','es','un', 'array'];
+  calendar = new Array<Calendar>();
+  private storeService = Inject(FacadeService);
+  
+  ngOnInit(): void {
+    
+  }
 
 }
