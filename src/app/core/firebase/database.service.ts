@@ -9,6 +9,9 @@ import {
   query,
   ref,
   startAt,
+  off,
+  Query
+  
 
 } from '@angular/fire/database';
 import { UserInformation } from '../interface/userInfo.interface';
@@ -22,6 +25,7 @@ export class DatabaseService {
   private dataListUser$ = this.dataListUser.asObservable();
   private dataListUserInfo = new BehaviorSubject<UserInformation | null>(null);
   private dataListUserInfo$ = this.dataListUserInfo.asObservable();
+  private queryList: Query[] = [];
   db = inject(Database);
 
   private snapshotDatabaseTurn(snapshot: DataSnapshot) {
@@ -41,7 +45,6 @@ export class DatabaseService {
       };
       result.push(turno);
     })
-    console.log(result);
     this.dataListTurn.next(result);
   }
 
@@ -75,8 +78,8 @@ export class DatabaseService {
     this.dataListUserInfo.next(result);
   }
   
-  readDataQueryTurn() {
-    const dateNow = new Date();
+  readDataQueryTurn(dateNow : Date) {
+    
     const formatDate  = dateNow.toLocaleDateString.bind(dateNow)
     const dateInit =  formatDate('es-ES', { year: 'numeric' }) + '/' +
                       formatDate('es-ES', { month: '2-digit' }) + '/' +
@@ -96,7 +99,8 @@ export class DatabaseService {
       endAt(dateEnd)
     );
       const callback = this.snapshotDatabaseTurn.bind(this);
-      onValue(starCountRef, callback, (error) => console.log(error));
+    onValue(starCountRef, callback, (error) => console.log(error));
+    this.queryList.push(starCountRef);
       return this.dataListTurn$;
   }
 
@@ -104,13 +108,21 @@ export class DatabaseService {
     const starCountRef = query(ref(this.db, 'usuarios'));
     const callback = this.snapshotDatabaseUsers.bind(this);
     onValue(starCountRef, callback, (error) => console.log(error));
+    this.queryList.push(starCountRef);
     return this.dataListUser$;
   }
 
   readDataQueryUserInfo(id: string) {
+    
     const starCountRef = query(ref(this.db, 'usuarios/' + id) );
     const callback = this.snapshotDatabaseUserInfo.bind(this);
     onValue(starCountRef, callback, (error) => console.log(error));
+    this.queryList.push(starCountRef);
     return this.dataListUserInfo$;
   }
+
+  cancelQuery() {
+    this.queryList.forEach(query => off(query));
+  }
+
 }

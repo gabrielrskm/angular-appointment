@@ -9,6 +9,7 @@ import { ScheduleSmartComponent } from './container/schedule-smart.component';
 import { CalendarSmartComponent } from './container/calendar-smart.component';
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { ScheduleComponent } from './components/schedule/schedule.component';
+import { MatIconModule } from '@angular/material/icon';
 
 
 @NgModule({
@@ -17,13 +18,14 @@ import { ScheduleComponent } from './components/schedule/schedule.component';
     ScheduleSmartComponent,
     CalendarSmartComponent,
     CalendarComponent,
-    ScheduleComponent
+    ScheduleComponent,
   ],
   imports: [
     CommonModule,
     AppointmentRoutingModule,
     MatCardModule,
-    MatButtonModule
+    MatButtonModule,
+    MatIconModule
   ]
 })
 export class AppointmentModule { }

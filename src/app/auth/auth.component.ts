@@ -1,8 +1,8 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { BehaviorSubject, filter, Observable, Subscriber, tap } from 'rxjs';
-import { FirebaseService } from 'src/app/core/firebase/auth.service';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { AuthService } from '../core/firebase/auth.service';
 import { UserInformation } from '../core/interface/userInfo.interface';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-auth',
@@ -10,24 +10,30 @@ import { UserInformation } from '../core/interface/userInfo.interface';
     styleUrls: ['./auth.component.scss'],
 })
 export class AuthComponent implements OnInit, OnDestroy {
-    router = inject(Router);
-    fireService = inject(FirebaseService);
-    userInfo$: Observable<UserInformation | null> = new BehaviorSubject(null);
-    authSubscription: any;
+
+    service = inject(AuthService)
+    route  = inject(Router)
+    result$: Observable<UserInformation | null> = new BehaviorSubject(null);
+    init : Subscription = new Subscription();
+    charge : boolean = false
 
     ngOnInit() {
-        this.userInfo$ = this.fireService.getUserInfo();
-        this.authSubscription = this.userInfo$.subscribe(
-            (value) => {
-                if (!value) return;
-                if (value.role === 'admin') this.router.navigate(['/dashboard']);
-                else this.router.navigate(['/appointment']);
+        this.result$ = this.service.getUserInfo();
+        this.init = this.result$.subscribe((value) => {
+            
+            if (value === null) this.charge = true;
+            if (value)  {
+                this.charge = false;
+                if (value.role === 'admin') this.route.navigate(['/admin']);
+                else this.route.navigate(['/appointment']);
             }
-        )
+        
+            
+        })
     }
 
     ngOnDestroy(): void {
-        this.authSubscription.unsubscribe();
+        this.init.unsubscribe();
     }
 
 }

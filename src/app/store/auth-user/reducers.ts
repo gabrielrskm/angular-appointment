@@ -19,7 +19,6 @@ export const userReducer = createReducer(
   initialState,
   on(loginSucces, (state, { user }) => {
 
-    localStorage.setItem('user', JSON.stringify(user));
     return {
       ...state,
       id: '',

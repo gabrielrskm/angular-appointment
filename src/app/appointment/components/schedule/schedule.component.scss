@@ -1,0 +1,45 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    overflow-y: auto;
+    gap: 1rem;
+}
+
+.content{
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: start;
+
+    
+    mat-card{
+        height: 6rem;
+        width: 10rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    mat-card:nth-child(1){ 
+        width: 5rem;
+    }
+
+    :hover{
+        cursor: pointer;
+    }
+
+
+}
+
+mat-icon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(49, 59, 211);
+    font-size: 4rem;
+    width: 5rem;
+    height: 5rem;
+}

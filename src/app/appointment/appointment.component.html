@@ -1,12 +1,20 @@
-<button mat-raised-button color="primary">Log Out</button>
-<br><br>
-<div class="content">
-    <mat-card class = "days">
-        <app-calendar-smart></app-calendar-smart>
-    </mat-card>
-    <br><br>
-    <mat-card class = "schedule">
-        <app-schedule-smart></app-schedule-smart>
-    </mat-card>
+<div class="container">
+    <main>
+        <button mat-raised-button color="primary"
+            (click)="logOutClick()">
+        Log Out
+    </button>
+    </main>
+    <div class="content">
+        <mat-card class = "days">
+            <app-calendar-smart></app-calendar-smart>
+        </mat-card>
+        <br><br>
+        <mat-card class = "schedule">
+            <app-schedule-smart></app-schedule-smart>
+        </mat-card>
+    
+    </div>
+
 
 </div>

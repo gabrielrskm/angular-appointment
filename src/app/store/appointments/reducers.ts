@@ -1,33 +1,26 @@
 import { createReducer, on } from '@ngrx/store';
-import { UserInterface } from '../../core/interface/user.interface';
+import { AppointmentInterface } from '../../core/interface/appointment.interface';
+import { loadAppointment, loadAppointmentSuccess } from './actions';
 
+export interface AppointmentState{
+  list : AppointmentInterface[];
+}
 
-// export const initialState: UserInterface = {
-//   id: '',
-//   email: '',
-//   name: 'unknow',
-//   role: 'client',
-//   provider: '',
-//   login: 'not login',
-//   tokken: 'NOT TOKEN',
-// };
+export const initialState: AppointmentState = {
 
+  list : []
+}
 
+export const appointmentReducer = createReducer(
+   initialState,
+  on(loadAppointment, (state) => {
+      
+      return { ...state, };
+   }),
+  on(loadAppointmentSuccess, (state, {value}) => {
 
-// export const userReducer = createReducer(
-//   initialState,
-//   on(loginSucces, (state, { user }) => {
-
-//     localStorage.setItem('user', JSON.stringify(user));
-//     return {
-//       ...state,
-//       id: '',
-//       email: user.email,
-//       name: user.name,
-//       role: user.role,
-//       provider: user.provider,
-//       login:  user.login,
-//       tokken: user.tokken,
-//     };
-//   }),
-// );
+    return {
+      ...state, list : value
+    };
+   })
+);

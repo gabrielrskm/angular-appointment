@@ -16,6 +16,7 @@ import { AuthEffects } from './store/auth-user/effects';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 
 import { HttpClientModule } from '@angular/common/http';
+import { AppointmentEffects } from './store/appointments/effects';
 
 @NgModule({
     declarations: [AppComponent],
@@ -31,7 +32,7 @@ import { HttpClientModule } from '@angular/common/http';
         provideAuth(() => getAuth()),
         provideDatabase(() => getDatabase()),
         StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
-        EffectsModule.forRoot([AuthEffects]),
+        EffectsModule.forRoot([AuthEffects,AppointmentEffects]),
         StoreRouterConnectingModule.forRoot(),
     ],
     providers: [],

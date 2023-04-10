@@ -5,17 +5,19 @@ import {
    GoogleAuthProvider,
    signInWithRedirect,
    user,
+   signOut,
+   
 } from '@angular/fire/auth';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { Observable, of, Subject } from 'rxjs';
 import { UserInformation } from '../interface/userInfo.interface';
 import { DatabaseService } from './database.service';
 import { filter, switchMap } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
-export class FirebaseService {
+export class AuthService {
    private provider = new GoogleAuthProvider();
    private auth = inject(Auth);
-   private userInfo = new BehaviorSubject<UserInformation | null>(null);
+   private userInfo = new Subject<UserInformation | null>();
    userInfo$ = this.userInfo.asObservable();
    private database = inject(DatabaseService);
    canLogin: boolean = false;
@@ -31,6 +33,11 @@ export class FirebaseService {
       return res;
    }
 
+   logOut()  : Promise<void> {
+      this.database.cancelQuery();
+      return signOut(this.auth);
+   }
+
    getUserInfo(): Observable<UserInformation | null> {
       const userResult = user(this.auth);
       userResult
@@ -39,6 +46,7 @@ export class FirebaseService {
                if (!user) {
                   this.canLogin = false;
                   this.canAdmin = false;
+                  this.userInfo.next(null);
                   return of(null)
                };
                return this.database.readDataQueryUserInfo(user.uid);

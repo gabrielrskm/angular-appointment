@@ -1,5 +1,8 @@
-import { Component, Inject } from '@angular/core';
-import { FacadeService } from '../core/services/facade.service';
+import { Component, inject } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from '../core/firebase/auth.service';
+import { Store } from '@ngrx/store';
+import { loadAppointment } from '../store/appointments/actions';
 
 interface Calendar {
   dayOfWeek: string,
@@ -16,10 +19,19 @@ interface Calendar {
 export class AppointmentComponent {
 
   calendar = new Array<Calendar>();
-  private storeService = Inject(FacadeService);
+  fireService = inject(AuthService);
+  store = inject(Store);
+  router = inject(Router);
   
   ngOnInit(): void {
-    
+
+    this.store.dispatch(loadAppointment());
   }
 
+  logOutClick() {
+    this.fireService.logOut().then(() => {
+      this.router.navigate(['/']);
+    });
+
+  }
 }

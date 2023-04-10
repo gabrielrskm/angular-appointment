@@ -1,19 +1,27 @@
-import { createSelector } from '@ngrx/store';
-import { AppState } from '../app.state';
-import { UserInterface } from '../../core/interface/user.interface';
+import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { AppointmentState } from './reducers';
 
-export const selectUserState = (state: AppState) => state.user;
+export const selectAppointmentState =
+  
+  createFeatureSelector<AppointmentState>('appointment');
 
-export const selecCurrentUser = createSelector(
-  selectUserState,
-  (state : UserInterface ) => {
-    return state;
+
+export const selecAppointment = createSelector(
+  selectAppointmentState,
+  (state) => {
+    return state.list;
   }
 );
 
-export const selectTokken = createSelector(
-  selectUserState,
-  (state : UserInterface ) => {
-    return state.tokken;
+export const selectDayAppointment = createSelector(
+  selecAppointment,
+  (state) => {
+    let uniqueDay : Array<any> = [];
+    state.forEach((element:any) => {
+      if (!uniqueDay.includes(element.fecha)) {
+        uniqueDay.push(element.fecha);
+      }
+    })
+    return uniqueDay;
   }
-);
+)

@@ -1,30 +1,21 @@
 <div *ngIf="dataContent" class="content">
     <div *ngFor="let item of dataList; let i = index"
-         (click)="selectDayClick(i)">
-        <br>
+         (click)="selectDayClick(i)"
+         >
         <mat-card>
-            <mat-card-header >
                 <p>{{item.dayOfWeek}}</p>
-            </mat-card-header>
-            <br>
-            <mat-card-content>
-                <strong>{{item.numberDay}}</strong>
-                <br>
+                <p>{{item.numberDay}}</p>
                 <p>{{item.month}}</p>
-            </mat-card-content> 
-            <mat-card-footer>
                 <p>{{item.year}}</p>
-            </mat-card-footer>
         </mat-card>
-        <br>
     </div>
 </div>
 
 <div *ngIf="!dataContent" class="no-data">
     <mat-card>
-            <mat-card-content>
-                <h1>No days with appointment</h1>
-            </mat-card-content>
+        <mat-card-header>
+            <h1>No days with appointment</h1>
+        </mat-card-header>
             <img mat-card-xl-image                             
                  src="https://material.angular.io/assets/img/examples/shiba2.jpg" 
                  alt="Photo of a Shiba Inu">
