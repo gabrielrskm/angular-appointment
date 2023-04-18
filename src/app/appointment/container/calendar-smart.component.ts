@@ -5,6 +5,7 @@ import { DatabaseService } from 'src/app/core/firebase/database.service';
 import { selectDayAppointment } from 'src/app/store/appointments/selector';
 import { Subscription, filter } from 'rxjs';
 import { formatDate } from '@angular/common';
+import { setSelectDayAppointemt } from 'src/app/store/appointments/actions';
 
 
 
@@ -12,24 +13,24 @@ import { formatDate } from '@angular/common';
 
 @Component({
     selector: 'app-calendar-smart',
-    template: `<app-calendar [dataList]="valueList"></app-calendar>`
+    template: `<app-calendar [dataList]="valueList" (selectDay)="selecDay($event)"></app-calendar>`
 })
 
-export class CalendarSmartComponent implements OnInit,OnDestroy {
+export class CalendarSmartComponent implements OnInit, OnDestroy {
 
     serviceData = inject(DatabaseService);
     store = inject(Store);
     valueList: CalendarInterface[] | null = null;
-    subscription : Subscription | null = null;
+    subscription: Subscription | null = null;
 
-    ngOnInit() { 
+    ngOnInit() {
 
         this.subscription = this.store.select(selectDayAppointment).pipe(
-            filter((data) => data.length>0)
+            filter((data) => data.length > 0)
         ).subscribe(
             (data: Array<string>) => {
 
-                let array:CalendarInterface[] = [];
+                let array: CalendarInterface[] = [];
                 data.forEach((element: string) => {
                     const obj = new CalendarObject(
                         formatDate(element, 'EEEE', 'en-US'),
@@ -48,6 +49,10 @@ export class CalendarSmartComponent implements OnInit,OnDestroy {
     }
 
     ngOnDestroy(): void {
-        this.subscription?.unsubscribe(); 
+        this.subscription?.unsubscribe();
+    }
+
+    selecDay(id: any) {
+        this.store.dispatch(setSelectDayAppointemt({ value:id }));   
     }
 }

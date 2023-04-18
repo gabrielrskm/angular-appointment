@@ -1,61 +1,49 @@
+.content {
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+   align-items: center;
+   overflow: auto;
+   gap: 1rem;
+   width: 100%;
+   max-width: max-content;
+    .list {
+      margin: 8px 8px 8px 8px;
+      max-width: 25rem;
+      &:hover {
+         cursor: pointer;
+         background: #e0e0e0;
+         box-shadow: -10px 10px 19px #c1c1c1, 10px -10px 19px #ffffff;
+      }
 
-p{
-    font-size: 1rem;
+      mat-card-content {
+         width: 8rem;
+         display: flex;
+         flex-direction: column;
+         justify-content: space-between;
+         align-items: center;
+         p:nth-child(1) {
+            font-size: 1.2rem;
+         }
+         p:nth-child(2) {
+            font-size: 2rem;
+         }
+         p:nth-child(3) {
+            font-size: 1.2rem;
+         }
+         p:nth-child(4) {
+            font-size: 1rem;
+            align-self: flex-end;
+         }
+      }
+   }
 }
 
-
-.content{
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    overflow-x: auto;
-    scrollbar-width: 1px;
-    max-width: calc(100vw - 3rem);
-    border-color: rgb(126, 130, 131);
-    border-radius: 10px;
-    border-width: 2px;
-    div{
-        min-width: 7rem;
-        :hover{
-            background-color: rgb(126, 130, 131);
-            border-color: rgb(126, 130, 131);
-            cursor: pointer;
-        }
-
-        mat-card{
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            align-items: center;
-            p:nth-child(1){
-                font-size: 1.2rem;
-            }
-            p:nth-child(2){
-                font-size: 2rem;
-            }
-            p:nth-child(3){
-                font-size: 1.2rem;
-            }
-            p:nth-child(4){
-                font-size: 1rem;
-                align-self: flex-end;
-            }
-            
-        }
-    }
+.no-data {
+   mat-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+   }
 }
-
-
-
-
-.no-data{
-    mat-card{
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        align-items: center;
-        
-    }
-}
-
-

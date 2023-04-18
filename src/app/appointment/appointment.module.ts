@@ -8,8 +8,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { ScheduleSmartComponent } from './container/schedule-smart.component';
 import { CalendarSmartComponent } from './container/calendar-smart.component';
 import { CalendarComponent } from './components/calendar/calendar.component';
-import { ScheduleComponent } from './components/schedule/schedule.component';
+import { ScheduleComponent, ScheduleDialogComponent } from './components/schedule/schedule.component';
 import { MatIconModule } from '@angular/material/icon';
+import {MatDialogModule} from '@angular/material/dialog';
 
 
 @NgModule({
@@ -19,13 +20,15 @@ import { MatIconModule } from '@angular/material/icon';
     CalendarSmartComponent,
     CalendarComponent,
     ScheduleComponent,
+    ScheduleDialogComponent
   ],
   imports: [
     CommonModule,
     AppointmentRoutingModule,
     MatCardModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    MatDialogModule
   ]
 })
 export class AppointmentModule { }

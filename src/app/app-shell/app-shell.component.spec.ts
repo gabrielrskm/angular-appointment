@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PopUpFormComponent } from './pop-up-form.component';
+import { AppShellComponent } from './app-shell.component';
 
-describe('PopUpFormComponent', () => {
-  let component: PopUpFormComponent;
-  let fixture: ComponentFixture<PopUpFormComponent>;
+describe('AppShellComponent', () => {
+  let component: AppShellComponent;
+  let fixture: ComponentFixture<AppShellComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PopUpFormComponent ]
+      declarations: [ AppShellComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(PopUpFormComponent);
+    fixture = TestBed.createComponent(AppShellComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

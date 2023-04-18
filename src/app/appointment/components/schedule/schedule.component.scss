@@ -4,7 +4,6 @@
     justify-content: start;
     align-items: start;
     overflow-y: auto;
-    gap: 1rem;
 }
 
 .content{
@@ -12,26 +11,29 @@
     flex-direction: row;
     justify-content: start;
     align-items: start;
+    padding-bottom: 0.4rem;
 
-    
     mat-card{
         height: 6rem;
-        width: 10rem;
+        width: 18rem;
+        display: flex;
+        flex-direction: row;
+        justify-content: start;
+        align-items: center;
+        &:hover{
+            cursor: pointer;
+            background-color: rgb(163, 158, 158);
+        }
+
+    }
+    
+    .card-content{
+        flex: 1 1 auto;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
     }
-
-    mat-card:nth-child(1){ 
-        width: 5rem;
-    }
-
-    :hover{
-        cursor: pointer;
-    }
-
-
 }
 
 mat-icon{
@@ -42,4 +44,8 @@ mat-icon{
     font-size: 4rem;
     width: 5rem;
     height: 5rem;
+}
+
+.selected {
+    color: red;
 }

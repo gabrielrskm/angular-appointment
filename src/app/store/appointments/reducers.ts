@@ -1,14 +1,16 @@
 import { createReducer, on } from '@ngrx/store';
-import { AppointmentInterface } from '../../core/interface/appointment.interface';
-import { loadAppointment, loadAppointmentSuccess } from './actions';
+import { loadAppointment, loadAppointmentSuccess, setSelectDayAppointemt } from './actions';
+import { TurnInterface } from 'src/app/core/firebase/database.service';
 
 export interface AppointmentState{
-  list : AppointmentInterface[];
+  list: TurnInterface[];
+  daySelect: number;
 }
 
 export const initialState: AppointmentState = {
 
-  list : []
+  list: [],
+  daySelect: 0
 }
 
 export const appointmentReducer = createReducer(
@@ -22,5 +24,11 @@ export const appointmentReducer = createReducer(
     return {
       ...state, list : value
     };
-   })
+  }),
+  on (setSelectDayAppointemt, (state, {value}) => {
+    return {
+      ...state, daySelect: value
+    };
+  })
+  
 );

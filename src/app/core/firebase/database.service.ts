@@ -16,6 +16,37 @@ import {
 } from '@angular/fire/database';
 import { UserInformation } from '../interface/userInfo.interface';
 
+export interface TurnInterface{
+
+  id : string,
+  date : string,
+  init_time : string,
+  end_time : string,
+  aviable : string,
+  users : string
+}
+
+export class TurnClass  {
+
+  id: string;
+  date: string;
+  init_time: string;
+  end_time: string;
+  aviable: string;
+  users: string;
+  
+  
+  constructor(id: string, date: string, init_time: string, end_time: string, aviable: string, users: string) {
+    this.id = id;
+    this.date = date;
+    this.init_time = init_time;
+    this.end_time = end_time;
+    this.aviable = aviable;
+    this.users = users;
+    
+  }
+}
+
 @Injectable({ providedIn: 'root' })
 export class DatabaseService {
 
@@ -35,13 +66,13 @@ export class DatabaseService {
     }
     let result: any[] = [];
     snapshot.forEach((element: DataSnapshot) => {
-      const turno = {
-        id : element.key,
-        fecha : element.val().fecha,
-        hora_inicio : element.val().hora_inicio,
-        hora_fin : element.val().hora_fin,
-        vacantes_disponibles : element.val().vacantes_disponibles,
-        usuarios : element.val().usuarios !== undefined ? element.val().usuarios : ""
+      const turno : TurnInterface = {
+        id : element.key || '',
+        date : element.val().fecha,
+        init_time : element.val().hora_inicio,
+        end_time : element.val().hora_fin,
+        aviable : element.val().vacantes_disponibles,
+        users : element.val().usuarios !== undefined ? element.val().usuarios : ""
       };
       result.push(turno);
     })
@@ -101,7 +132,7 @@ export class DatabaseService {
       const callback = this.snapshotDatabaseTurn.bind(this);
     onValue(starCountRef, callback, (error) => console.log(error));
     this.queryList.push(starCountRef);
-      return this.dataListTurn$;
+    return this.dataListTurn$;
   }
 
   readDataQueryUsers() {

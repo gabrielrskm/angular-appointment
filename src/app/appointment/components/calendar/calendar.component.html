@@ -1,12 +1,14 @@
-<div *ngIf="dataContent" class="content">
-    <div *ngFor="let item of dataList; let i = index"
+<div *ngIf="dataContent" class="content"  id="dayList">
+    <div *ngFor="let item of dataList; let i = index" class ="list"
          (click)="selectDayClick(i)"
          >
-        <mat-card>
-                <p>{{item.dayOfWeek}}</p>
+        <mat-card >
+            <mat-card-content #days>
+                <p >{{item.dayOfWeek}}</p>
                 <p>{{item.numberDay}}</p>
                 <p>{{item.month}}</p>
                 <p>{{item.year}}</p>
+            </mat-card-content>
         </mat-card>
     </div>
 </div>

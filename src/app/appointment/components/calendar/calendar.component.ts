@@ -1,5 +1,9 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
-
+import {
+    Component, EventEmitter,
+    Input, OnChanges, OnInit, Output,
+    Renderer2, inject, ElementRef,
+    ViewChildren, QueryList, AfterViewChecked 
+} from '@angular/core';
 
 export interface CalendarInterface {
     dayOfWeek: string,
@@ -27,28 +31,34 @@ export class CalendarObject implements CalendarInterface {
     styleUrls: ['./calendar.component.scss']
 })
 
-export class CalendarComponent implements OnInit,OnChanges{
+export class CalendarComponent implements OnChanges, OnInit, AfterViewChecked {
 
     @Input() dataList: CalendarInterface[] | null = null;
     dataContent: boolean = true;
-    
-    @Output() selectDay = new EventEmitter<CalendarInterface>();
+    @Output() selectDay = new EventEmitter<number>();
+    renderer = inject(Renderer2)
+    index: number = 0;
 
-    ngOnInit() { 
-        if(this.dataList) {
-            this.dataContent = true;
-        }
-        else this.dataContent = false;
+    @ViewChildren('days') algo: QueryList<ElementRef<HTMLDivElement>> | undefined;
+
+    ngOnInit(): void {
+        if (this.dataList) this.selectDay.emit(0);  
+    }
+
+    ngAfterViewChecked(): void {
+        const list = this.algo?.get(this.index)?.nativeElement;
+        if(list) this.renderer.setStyle(list, 'background-color', '#d1edee');
     }
 
     ngOnChanges(): void {
-        if(this.dataList) {
-            this.dataContent = true;
-        }
+        if(this.dataList) this.dataContent = true;
         else this.dataContent = false;
     }
 
-    selectDayClick(event:number) {
-        this.selectDay.emit(this.dataList?.[event]);
+    selectDayClick(event: number) {
+        this.index  = event;
+        this.selectDay.emit(event);
     }
+
+
 }
